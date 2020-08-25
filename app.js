@@ -6,12 +6,14 @@ const port = 5000;
 
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/user-routes')
+const assetsRoutes = require('./routes/assets-routes')
+
 
 app.use(bodyParser.json())
 
-//users routes 
-app.use('/api/users', userRoutes)
 
+app.use('/api/users', userRoutes)
+app.use('/api/assets', assetsRoutes)
 
 //connect to database 
 mongoose.set("useCreateIndex", true);
