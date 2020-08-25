@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
+import { INITIAL_SIGNUP_USER } from '../../config';
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
 
 function Signup() {
-  const INITIAL_USER = {
-    name: '',
-    email: '',
-    password: ''
-  };
-  const [user, setUser] = useState(INITIAL_USER);
-
+  const [user, setUser] = useState(INITIAL_SIGNUP_USER);
   function handleChange(e) {
     const { name, value } = e.target;
     setUser((prevState) => ({ ...prevState, [name]: value }));
@@ -36,6 +31,7 @@ function Signup() {
               value={user.name}
               onChange={handleChange}
             />
+
             <Form.Input
               fluid
               icon='mail'
@@ -45,6 +41,7 @@ function Signup() {
               value={user.email}
               onChange={handleChange}
             />
+
             <Form.Input
               fluid
               icon='lock'
