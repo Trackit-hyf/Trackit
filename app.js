@@ -22,7 +22,7 @@ app.use('/api/assets', assetsRoutes)
 mongoose.set("useCreateIndex", true);
 mongoose
   .connect(
-    `mongodb+srv://HYF-Ammar:HYF_ammar_HYF1234@cluster0-ptw2q.azure.mongodb.net/trackit?retryWrites=true&w=majority`, 
+    `mongodb+srv://${process.env.MongoDb_user_name}:${process.env.MongoDB_password}@cluster0-ptw2q.azure.mongodb.net/${process.env.MonogDb_collection}?retryWrites=true&w=majority`, 
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
