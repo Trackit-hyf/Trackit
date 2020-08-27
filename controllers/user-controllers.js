@@ -1,17 +1,16 @@
 const firebase = require('../config/firebase');
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
-const mongoose = require('mongoose')
 
 const User = require('../models/user');
 
 const signup = async (req, res, next) => {
-	//check the info of the user
+
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return next(errors);
 	}
-	//register the user in firebase
+
 	const { name, email, password } = req.body;
 
 	let hashedPassword;
@@ -30,7 +29,7 @@ const signup = async (req, res, next) => {
 		console.log(error);
 		return next(error);
 	}
-	//get token for the user
+
 	let token;
 	let user; 
 	try {
@@ -41,7 +40,7 @@ const signup = async (req, res, next) => {
 		return next(error);
 	}
 
-	//create new user in the database mongodb.
+
 	const newUser = new User({ name, email, firebaseId: user.uid, password: hashedPassword });
 
 	try {
@@ -52,7 +51,7 @@ const signup = async (req, res, next) => {
 		});
 		return next(error);
 	}
-	//send back to frontend
+
 	res.status(201).json({
 		userId: newUser.id,
 		email: newUser.email,
@@ -63,10 +62,10 @@ const signup = async (req, res, next) => {
 const login = async (req, res, next) => {
 	const { email, password } = req.body;
 
-	//Check if the user exists already in the database
+
 	let user;
 	try {
-		user = await User.findOne({ email: email });
+		user = await User.findOne({email });
 	} catch (error) {
 		res.status(500).json({
 			msg: 'Logging in failed, please try again later'
@@ -80,7 +79,7 @@ const login = async (req, res, next) => {
 		});
 		return next(error);
 	}
-	//check the password
+
 	let isValidPassword = false;
 	try {
 		isValidPassword = await bcrypt.compare(password, user.password);
@@ -97,7 +96,7 @@ const login = async (req, res, next) => {
 		});
 		return next(error);
 	}
-	//log in using firebase
+
 	try {
 		await firebase.auth().signInWithEmailAndPassword(email, password);
 	} catch (error) {
@@ -105,7 +104,7 @@ const login = async (req, res, next) => {
 		return next(error);
 	}
 
-	//get token for the user
+
 	let token;
 	try {
 		token = await firebase.auth().currentUser.getIdToken(true);

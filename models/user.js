@@ -8,13 +8,21 @@ const userSchema = new Schema({
 	email: { type: String, required: true, unique: true },
 	password: { type: String, required: true, minlength: 6 },
 	firebaseId: { type: String, required: true },
-	assets: [{ 
-		assetId: {type: String , required: true,}, 
-		assetName: {type: String, required: true,},
-		assetPrice : {type: Number, required: true,}, 
-		assetAmount: {type: Number, required: true,}, 
-		dateOfPurchase: { type: Date , required: true,}
-	}]
+	assets: [
+		{
+			id: { type: String, required: true },
+			name: { type: String, required: true },
+			price: { type: Number, required: true },
+			hourly_price: [
+				{
+					Date: { type: Date },
+					Price: { type: Number }
+				}
+			],
+			amount: { type: Number, required: true },
+			dateOfPurchase: { type: Date, required: true }
+		}
+	]
 });
 
 userSchema.plugin(uniqueValidator);

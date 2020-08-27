@@ -1,27 +1,25 @@
 const express = require('express');
 const { check } = require('express-validator');
-const checkAuth = require('../middleware/checkAuth')
 const assetsController = require('../controllers/assets-controllers');
 
 const router = express.Router();
 
-router.use(checkAuth)
 
 router.get('/myAssets/:uid', assetsController.getMyAssets);
 router.post(
 	'/register-assets/:uid',
 	[
-		check('assetId').not().isEmpty(),
-		check('assetName').not().isEmpty(),
-		check('assetPrice').not().isEmpty(),
-		check('assetAmount').not().isEmpty(),
+		check('id').not().isEmpty(),
+		check('name').not().isEmpty(),
+		check('amount').not().isEmpty().isNumeric(),
+		check('price').not().isEmpty().isNumeric() ,
 		check('dateOfPurchase').not().isEmpty()
 	],
 	assetsController.registerAssets
 );
 
 router.patch(
-	'/modify-asset/:uid/:assetId',
+	'/modify-assets/:uid/:assetId',
 	[
 		check('assetId').not().isEmpty(),
 		check('assetName').not().isEmpty(),
@@ -31,5 +29,5 @@ router.patch(
 	],
 	assetsController.modifyAsset
 );
-router.delete('/delete-asset/:uid/:assetId', assetsController.deleteAssets);
+router.delete('/delete-assets/:uid/:assetId', assetsController.deleteAssets);
 module.exports = router;
