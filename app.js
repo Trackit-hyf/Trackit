@@ -1,23 +1,28 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
+const dotenv = require('dotenv').config()
 const port = 5000; 
  
 
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/user-routes')
+const assetsRoutes = require('./routes/assets-routes');
+const checkAuth = require('./middleware/checkAuth');
+
 
 app.use(bodyParser.json())
 
-//users routes 
+
 app.use('/api/users', userRoutes)
+app.use(checkAuth)
+app.use('/api/assets', assetsRoutes)
 
 
-//connect to database 
 mongoose.set("useCreateIndex", true);
 mongoose
   .connect(
-    `mongodb+srv://HYF-Ammar:HYF_ammar_HYF1234@cluster0-ptw2q.azure.mongodb.net/trackit?retryWrites=true&w=majority`, 
+    `mongodb+srv://${process.env.MongoDb_user_name}:${process.env.MongoDB_password}@cluster0-ptw2q.azure.mongodb.net/${process.env.MonogDb_collection}?retryWrites=true&w=majority`, 
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
