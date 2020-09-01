@@ -15,8 +15,8 @@ const userSchema = new Schema({
 			price: { type: Number, required: true },
 			hourly_price: [
 				{
-					Date: { type: Date },
-					Price: { type: Number }
+					date: { type: Date },
+					price: { type: Number }
 				}
 			],
 			amount: { type: Number, required: true },
