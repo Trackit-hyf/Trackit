@@ -4,15 +4,13 @@ const app = express();
 const dotenv = require('dotenv').config();
 const port = 5000;
 const updateAssetHourly = require('./utils/external-api')
+const updateStockAssets = require('./utils/external-api')
 
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user-routes');
 const assetsRoutes = require('./routes/assets-routes');
 const checkAuth = require('./middleware/checkAuth');
 
-// const bitcoinURL = 'https://api.coingecko.com/api/v3/coins/bitcoin';
-// const uid = '5f4a708b93806362a481df51';
-// const assetId = "5f4a7208ecd98c42409bf739";
 
 updateAssetHourly();
 

@@ -94,8 +94,6 @@ const modifyAsset = async (req, res, next) => {
 	}
 
 	const assetToModify = user.assets.id(aId);
-	assetToModify['id'] = id;
-	assetToModify['name'] = name;
 	assetToModify['price'] = price;
 	assetToModify['amount'] = amount;
 	assetToModify['dateOfPurchase'] = dateOfPurchase;

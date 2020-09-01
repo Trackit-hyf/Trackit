@@ -38,4 +38,9 @@ const updateCryptoCoins = async () => {
 	});
 };
 
+
 module.exports = updateCryptoCoins;
+
+
+
+
