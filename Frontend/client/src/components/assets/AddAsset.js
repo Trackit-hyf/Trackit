@@ -6,9 +6,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 function AddAsset() {
   const [asset, setAsset] = useState({
-    assetName: '',
-    assetPrice: '',
-    assetAmount: ''
+    name: '',
+    price: '',
+    amount: ''
   });
   const { addAsset } = useContext(GlobalContext);
   const history = useHistory();
@@ -21,7 +21,7 @@ function AddAsset() {
   function handleSubmit(e) {
     e.preventDefault();
     const newAsset = {
-      assetId: uuidv4(),
+      id: uuidv4(),
       ...asset
     };
     addAsset(newAsset);
@@ -43,8 +43,8 @@ function AddAsset() {
               icon='amazon'
               iconPosition='left'
               placeholder='Asset Name'
-              name='assetName'
-              value={asset.assetName}
+              name='name'
+              value={asset.name}
               onChange={onChange}
               required
             />
@@ -54,9 +54,9 @@ function AddAsset() {
               icon='dollar sign'
               iconPosition='left'
               placeholder='Price'
-              name='assetPrice'
+              name='price'
               type='number'
-              value={asset.assetPrice}
+              value={asset.price}
               onChange={onChange}
               required
             />
@@ -66,9 +66,9 @@ function AddAsset() {
               icon='dolly'
               iconPosition='left'
               placeholder='Amount'
-              name='assetAmount'
+              name='amount'
               type='number'
-              value={asset.assetAmount}
+              value={asset.amount}
               onChange={onChange}
               required
             />

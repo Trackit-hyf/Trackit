@@ -20,20 +20,20 @@ function AssetList() {
 
         <Table.Body>
           {assets.map((asset) => (
-            <Table.Row key={asset.assetId}>
+            <Table.Row key={asset.id}>
               <Table.Cell width='2'>
                 <Header as='h4'>
                   <Icon name='apple' />
-                  {asset.assetName}
+                  {asset.name}
                 </Header>
               </Table.Cell>
 
               <Table.Cell width='2' textAlign='center'>
-                ${asset.assetPrice}
+                ${asset.price}
               </Table.Cell>
 
               <Table.Cell width='2' textAlign='center'>
-                ${asset.assetAmount}
+                ${asset.amount}
               </Table.Cell>
 
               <Table.Cell width='1' textAlign='center'>
@@ -43,7 +43,7 @@ function AssetList() {
                   size='mini'
                   inverted
                   color='red'
-                  onClick={() => removeAsset(asset.assetId)}
+                  onClick={() => removeAsset(asset.id)}
                 />
               </Table.Cell>
             </Table.Row>

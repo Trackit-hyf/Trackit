@@ -5,22 +5,22 @@ import AppReducer from './AppReducer';
 const InitialState = {
   assets: [
     {
-      assetName: 'amazon',
-      assetPrice: '500',
-      assetAmount: '0.15',
-      assetId: '1'
+      name: 'amazon',
+      price: '500',
+      amount: '0.15',
+      id: '1'
     },
     {
-      assetName: 'apple',
-      assetPrice: '750',
-      assetAmount: '1.3',
-      assetId: '2'
+      name: 'apple',
+      price: '750',
+      amount: '1.3',
+      id: '2'
     },
     {
-      assetName: 'zoom',
-      assetPrice: '2000',
-      assetAmount: '6.2',
-      assetId: '3'
+      name: 'zoom',
+      price: '2000',
+      amount: '6.2',
+      id: '3'
     }
   ]
 };
@@ -40,10 +40,10 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
-  const removeAsset = (assetId) => {
+  const removeAsset = (id) => {
     dispatch({
       type: 'REMOVE_ASSET',
-      payload: assetId
+      payload: id
     });
   };
 

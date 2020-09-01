@@ -8,7 +8,7 @@ export default (state, action) => {
     case 'REMOVE_ASSET':
       return {
         assets: state.assets.filter((asset) => {
-          return asset.assetId !== action.payload;
+          return asset.id !== action.payload;
         })
       };
 
