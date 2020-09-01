@@ -11,7 +11,7 @@ const registerAssets = async (req, res, next) => {
 		user = await User.findById(uid);
 	} catch (err) {
 		res.status(500).json({
-			msg: 'Something went wrong, could not register assets.'
+			msg: 'Could not register asset.'
 		});
 		return next(error);
 	}
@@ -39,7 +39,7 @@ const registerAssets = async (req, res, next) => {
 	if (coinExists) {
 		if (user.firebaseId !== req.userData.firebaseId) {
 			res.status(500).json({
-				msg: 'You are not allowed to modify assets for this user'
+				msg: 'Not authorized '
 			});
 		}
 		const newAsset = {
@@ -73,7 +73,7 @@ const registerAssets = async (req, res, next) => {
 };
 
 const modifyAsset = async (req, res, next) => {
-	const { id, name, price, amount, dateOfPurchase } = req.body;
+	const {price, amount, dateOfPurchase } = req.body;
 	const uid = req.params.uid;
 	const aId = req.params.assetId;
 
