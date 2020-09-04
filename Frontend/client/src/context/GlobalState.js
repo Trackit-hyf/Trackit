@@ -3,6 +3,7 @@ import AppReducer from './AppReducer';
 
 // Initial State
 const InitialState = {
+  user: { userId: null, token: null },
   assets: [
     {
       name: 'amazon',
@@ -40,10 +41,24 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
-  const removeAsset = (id) => {
+  const removeAsset = (assetId) => {
     dispatch({
       type: 'REMOVE_ASSET',
-      payload: id
+      payload: assetId
+    });
+  };
+
+  const loginUser = (user) => {
+    dispatch({
+      type: 'LOGIN_USER',
+      payload: user
+    });
+  };
+
+  const logoutUser = (user) => {
+    dispatch({
+      type: 'LOGOUT_USER',
+      payload: user
     });
   };
 
@@ -52,7 +67,10 @@ export const GlobalProvider = ({ children }) => {
       value={{
         assets: state.assets,
         addAsset,
-        removeAsset
+        removeAsset,
+        user: state.user,
+        loginUser,
+        logoutUser
       }}
     >
       {children}

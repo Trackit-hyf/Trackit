@@ -1,17 +1,40 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { INITIAL_SIGNUP_USER } from '../../config';
-import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Segment,
+  Message
+} from 'semantic-ui-react';
+import Axios from 'axios';
 
 function Signup() {
   const [user, setUser] = useState(INITIAL_SIGNUP_USER);
+  const [error, setError] = useState(false);
+  const history = useHistory();
+
   function handleChange(e) {
     const { name, value } = e.target;
     setUser((prevState) => ({ ...prevState, [name]: value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(user);
+    try {
+      const payload = { ...user };
+      console.log(payload);
+      const response = await Axios.post('/api/users/signup', payload);
+      console.log(response);
+      console.log(response.data.token);
+      if (response.data.token) history.push('/login');
+      // add loading state
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    }
   }
 
   return (
@@ -20,7 +43,7 @@ function Signup() {
         <Header as='h2' color='grey' textAlign='center'>
           Create an account
         </Header>
-        <Form size='large' onSubmit={handleSubmit}>
+        <Form size='large' onSubmit={handleSubmit} error>
           <Segment stacked>
             <Form.Input
               fluid
@@ -56,6 +79,13 @@ function Signup() {
             <Button color='orange' fluid size='medium'>
               Signup
             </Button>
+            {error && (
+              <Message
+                error
+                header='Invalid Credentials'
+                content='Please fill the fields correctly'
+              />
+            )}
           </Segment>
         </Form>
       </Grid.Column>
