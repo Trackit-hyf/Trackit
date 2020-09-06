@@ -4,7 +4,6 @@ import { GlobalContext } from '../../context/GlobalState';
 
 function AssetList() {
   const { assets, removeAsset } = useContext(GlobalContext);
-  console.log('ASSETLIST', assets);
 
   return (
     <>

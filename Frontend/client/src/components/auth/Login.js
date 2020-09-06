@@ -25,18 +25,15 @@ function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // console.log(user);
     try {
       const payload = { ...user };
       const response = await Axios.post('/api/users/login', payload);
-      console.log(response.data);
       if (response.data.token) {
         loginUser(response.data);
         history.push('/myassets');
       }
     } catch (error) {
       setError(true);
-      console.log(error);
     }
   }
 

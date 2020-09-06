@@ -25,15 +25,11 @@ function Signup() {
     e.preventDefault();
     try {
       const payload = { ...user };
-      console.log(payload);
       const response = await Axios.post('/api/users/signup', payload);
-      console.log(response);
-      console.log(response.data.token);
       if (response.data.token) history.push('/login');
       // add loading state
     } catch (error) {
       setError(true);
-      console.log(error);
     }
   }
 

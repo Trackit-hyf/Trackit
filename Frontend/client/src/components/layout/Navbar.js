@@ -4,7 +4,6 @@ import { GlobalContext } from '../../context/GlobalState';
 
 const Navbar = ({ user }) => {
   const { logoutUser } = useContext(GlobalContext);
-  console.log('Navbar', user);
 
   return (
     <>
