@@ -27,7 +27,6 @@ function AddAsset() {
     addAsset(newAsset);
     history.push('/myassets');
   }
-  console.log(asset);
 
   return (
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
