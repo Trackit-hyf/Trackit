@@ -10,7 +10,7 @@ const Navbar = ({ user }) => {
       {user.token ? (
         <nav className='navbar nav-bg'>
           <h1>
-            <Link to='/'>My Finance</Link>
+            <Link to='/'>Trackit</Link>
           </h1>
           <ul>
             <li>
@@ -26,7 +26,7 @@ const Navbar = ({ user }) => {
       ) : (
         <nav className='navbar nav-bg'>
           <h1>
-            <Link to='/'>My Finance</Link>
+            <Link to='/'>Trackit</Link>
           </h1>
           <ul>
             <li>

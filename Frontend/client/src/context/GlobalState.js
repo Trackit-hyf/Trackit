@@ -4,26 +4,7 @@ import AppReducer from './AppReducer';
 // Initial State
 const InitialState = {
   user: { userId: null, token: null },
-  assets: [
-    {
-      name: 'amazon',
-      price: '500',
-      amount: '0.15',
-      id: '1'
-    },
-    {
-      name: 'apple',
-      price: '750',
-      amount: '1.3',
-      id: '2'
-    },
-    {
-      name: 'zoom',
-      price: '2000',
-      amount: '6.2',
-      id: '3'
-    }
-  ]
+  assets: []
 };
 
 // Create Context

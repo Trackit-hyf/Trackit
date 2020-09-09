@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Home from './components/layout/Home';
@@ -11,7 +11,7 @@ import { GlobalContext } from './context/GlobalState';
 import './App.css';
 
 function App() {
-  const { user, assets } = useContext(GlobalContext);
+  const { user } = useContext(GlobalContext);
 
   return (
     <Router>
