@@ -11,8 +11,10 @@ module.exports = async (req, res, next) => {
 			throw new Error('Authentication failed!');
 		}
 	} catch (err) {
-		console.log(err);
-		return next(err);
+		res.status(403).json({
+			msg: 'Authentication failed!'
+		});
+		return next(error);
 	}
 
 	try {
@@ -20,7 +22,9 @@ module.exports = async (req, res, next) => {
 		req.userData = { firebaseId: decodedToken.uid };
 		return next();
 	} catch (err) {
-		console.log(err);
+		res.status(500).json({
+			msg: 'Authentication failed!'
+		});
 		return next(err);
 	}
 };
