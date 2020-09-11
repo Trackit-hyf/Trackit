@@ -11,8 +11,10 @@ const updateAssetHourly = require('./utils/external-api')
 
 updateAssetHourly();
 
+
 app.use(bodyParser.json());
 
+app.use('')
 app.use('/api/users', userRoutes);
 app.use(checkAuth);
 app.use('/api/assets', assetsRoutes);
