@@ -14,7 +14,9 @@ updateAssetHourly();
 
 app.use(bodyParser.json());
 
-app.use('')
+app.use('/', (res, req, next)=>{
+    res.send('hi man!')
+})
 app.use('/api/users', userRoutes);
 app.use(checkAuth);
 app.use('/api/assets', assetsRoutes);
