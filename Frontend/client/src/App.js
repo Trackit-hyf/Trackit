@@ -6,6 +6,7 @@ import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import MyAssets from './components/assets/MyAssets';
 import AddAsset from './components/assets/AddAsset';
+import Chart from './components/assets/Chart';
 import { GlobalContext } from './context/GlobalState';
 
 import './App.css';
@@ -35,18 +36,20 @@ function App() {
                     component={AddAsset}
                     user={user}
                   />
+                  <Route
+                    exact
+                    path='/myassets/chart'
+                    component={Chart}
+                    user={user}
+                  />
                 </>
               ) : (
                 <>
                   <Route exact path='/signup' component={Signup} />
                   <Route exact path='/login' component={Login} />
                   <Route exact path='/myassets' component={Login} />
-                  <Route
-                    exact
-                    path='/myassets/add'
-                    component={Login}
-                    user={user}
-                  />
+                  <Route exact path='/myassets/add' component={Login} />
+                  <Route exact path='/myassets/chart' component={Login} />
                 </>
               )}
             </>

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 import {
   Header,
   Table,
@@ -72,52 +73,71 @@ function AssetList() {
           content='Something went wrong with getting assets'
         />
       ) : assets.length > 0 ? (
-        <Table celled unstackable textAlign='center'>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Asset</Table.HeaderCell>
-              <Table.HeaderCell>Price</Table.HeaderCell>
-              <Table.HeaderCell>Amount</Table.HeaderCell>
-              <Table.HeaderCell>Date of Purchase</Table.HeaderCell>
-              <Table.HeaderCell width='1'></Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-
-          <Table.Body>
-            {assets.map((asset) => (
-              <Table.Row key={asset.id}>
-                <Table.Cell width='2'>
-                  <Header as='h4'>{asset.name}</Header>
-                </Table.Cell>
-
-                <Table.Cell width='2' textAlign='center'>
-                  ${asset.price}
-                </Table.Cell>
-
-                <Table.Cell width='2' textAlign='center'>
-                  ${asset.amount}
-                </Table.Cell>
-
-                <Table.Cell width='2' textAlign='center'>
-                  {moment(asset.dateOfPurchase).format('DD/MM/YYYY')}
-                </Table.Cell>
-
-                <Table.Cell width='1' textAlign='center'>
-                  <Button
-                    circular
-                    icon='delete'
-                    size='mini'
-                    inverted
-                    color='red'
-                    onClick={() => {
-                      setAssetId(asset._id);
-                    }}
-                  />
-                </Table.Cell>
+        <>
+          <Table celled unstackable textAlign='center'>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Asset</Table.HeaderCell>
+                <Table.HeaderCell>Buy Price</Table.HeaderCell>
+                <Table.HeaderCell>Amount</Table.HeaderCell>
+                <Table.HeaderCell>Date of Purchase</Table.HeaderCell>
+                <Table.HeaderCell>Current Price</Table.HeaderCell>
+                <Table.HeaderCell width='1'></Table.HeaderCell>
               </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
+            </Table.Header>
+
+            <Table.Body>
+              {assets.map((asset) => (
+                <Table.Row key={asset.id}>
+                  <Table.Cell width='2'>
+                    <Link
+                      to={{
+                        pathname: '/myassets/chart',
+                        state: { asset }
+                      }}
+                    >
+                      <Header as='h4'>{asset.name}</Header>
+                    </Link>
+                  </Table.Cell>
+
+                  <Table.Cell width='2' textAlign='center'>
+                    ${asset.price}
+                  </Table.Cell>
+
+                  <Table.Cell width='2' textAlign='center'>
+                    ${asset.amount}
+                  </Table.Cell>
+
+                  <Table.Cell width='2' textAlign='center'>
+                    {moment(asset.dateOfPurchase).format('DD/MM/YYYY')}
+                  </Table.Cell>
+
+                  <Table.Cell width='2' textAlign='center'>
+                    {asset.hourly_price.map((hour, i, arr) => {
+                      // get the latest price in array
+                      if (arr.length - 1 === i) {
+                        return hour.price;
+                      }
+                    })}
+                  </Table.Cell>
+
+                  <Table.Cell width='1' textAlign='center'>
+                    <Button
+                      circular
+                      icon='delete'
+                      size='mini'
+                      inverted
+                      color='red'
+                      onClick={() => {
+                        setAssetId(asset._id);
+                      }}
+                    />
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table>
+        </>
       ) : (
         <h3>Please add a new asset</h3>
       )}
