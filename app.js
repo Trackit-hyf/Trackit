@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const dotenv = require('dotenv').config();
+const PORT = process.env.PORT || 5000;
 
 const mongoose = require('./db/mongodb')
 const userRoutes = require('./routes/user-routes');
@@ -19,4 +20,6 @@ app.use('/api/users', userRoutes);
 app.use(checkAuth);
 app.use('/api/assets', assetsRoutes);
 
-app.listen(process.env.port);
+app.listen(PORT, ()=>{
+    console.log('app is listening to' + PORT);
+});
