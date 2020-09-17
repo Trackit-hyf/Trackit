@@ -2,6 +2,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { Button, Icon, Divider, Header, Image } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
+import formatDate from '../../utils/formatDate';
 import moment from 'moment';
 
 function Chart() {
@@ -18,12 +19,10 @@ function Chart() {
   let updatedPrices = hourly_price.map((hour) => hour.price);
   if (updatedPrices.length < 1) updatedPrices = undefined;
 
-  const purchaseDate = moment(dateOfPurchase).format('DD/MM/YYYY');
+  const purchaseDate = formatDate(dateOfPurchase);
 
   const updatedDates = hourly_price.map((updatedInfo) => updatedInfo.date);
-  const updatedDatesInFormat = updatedDates.map((date) =>
-    moment(date).format('DD/MM/YYYY')
-  );
+  const updatedDatesInFormat = updatedDates.map((date) => formatDate(date));
 
   const data = {
     labels: [purchaseDate, ...updatedDatesInFormat],

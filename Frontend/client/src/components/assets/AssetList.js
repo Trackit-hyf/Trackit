@@ -9,6 +9,7 @@ import {
   Loader,
   Message
 } from 'semantic-ui-react';
+import formatDate from '../../utils/formatDate';
 import moment from 'moment';
 import { GlobalContext } from '../../context/GlobalState';
 import { useEffect } from 'react';
@@ -109,12 +110,11 @@ function AssetList() {
                   </Table.Cell>
 
                   <Table.Cell width='2' textAlign='center'>
-                    {moment(asset.dateOfPurchase).format('DD/MM/YYYY')}
+                    {formatDate(asset.dateOfPurchase)}
                   </Table.Cell>
 
                   <Table.Cell width='2' textAlign='center'>
                     {asset.hourly_price.map((hour, i, arr) => {
-                      // get the latest price in array
                       if (arr.length - 1 === i) {
                         return hour.price;
                       }
