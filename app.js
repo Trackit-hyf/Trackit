@@ -14,18 +14,10 @@ updateAssetHourly();
 
 app.use(bodyParser.json());
 
-<<<<<<< HEAD
-
-=======
->>>>>>> Frontend_Chart
 app.use('/api/users', userRoutes);
 app.use(checkAuth);
 app.use('/api/assets', assetsRoutes);
 
-<<<<<<< HEAD
-app.listen(PORT, ()=>{
-    console.log('app is listening to' + PORT);
+app.listen(PORT, () => {
+  console.log('app is listening to' + PORT);
 });
-=======
-app.listen(process.env.port);
->>>>>>> Frontend_Chart
