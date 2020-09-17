@@ -14,14 +14,13 @@ function MyAssets() {
         My Assets
       </Header>
 
-      <AssetList />
-
       <Link to='/myassets/add'>
         <Button color='orange' size='small'>
           <Icon name='plus' />
           Add new asset
         </Button>
       </Link>
+      <AssetList />
     </div>
   );
 }
