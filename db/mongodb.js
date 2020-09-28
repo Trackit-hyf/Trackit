@@ -6,7 +6,7 @@ mongoose
 	.connect(
 		`mongodb+srv://${process.env.MongoDb_user_name}:${process.env
 			.MongoDB_password}@cluster0-ptw2q.azure.mongodb.net/${process.env
-			.MonogDb_collection}?retryWrites=true&w=majority`,
+			.MongoDb_collection}?retryWrites=true&w=majority`,
 		{
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
