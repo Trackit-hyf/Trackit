@@ -5,6 +5,7 @@ const { validationResult } = require('express-validator');
 const User = require('../models/user');
 
 const signup = async (req, res, next) => {
+console.log("signup -> signup", signup)
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -60,6 +61,7 @@ const signup = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
+    console.log("login -> login", login)
 	const { email, password } = req.body;
 
 
