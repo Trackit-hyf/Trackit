@@ -7,7 +7,7 @@ console.log(process.env.MongoDb_user_name,process.env
 		.MongoDb_collection );
 mongoose
 	.connect(
-		`mongodb+srv://${process.env.MongoDb_user_name}:${process.env
+		`mongodb+srv://HYF-Ammar:${process.env
 			.MongoDB_password}@cluster0-ptw2q.azure.mongodb.net/${process.env
 			.MongoDb_collection}?retryWrites=true&w=majority`,
 		{
