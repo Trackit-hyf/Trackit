@@ -15,10 +15,12 @@ updateAssetHourly();
 
 app.use(bodyParser.json());
 
-
+console.log(1);
 app.use('/api/users', userRoutes);
+console.log(2);
 
 app.use(checkAuth);
+console.log(3);
 
 app.use('/api/assets', assetsRoutes);
 

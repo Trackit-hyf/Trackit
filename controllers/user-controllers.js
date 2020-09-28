@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator');
 const User = require('../models/user');
 
 const signup = async (req, res, next) => {
-console.log("signup -> signup", signup)
+console.log("signup -> signup", hi)
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -47,6 +47,7 @@ console.log("signup -> signup", signup)
 	try {
 		await newUser.save();
 	} catch (err) {
+        console.log(err)
 		res.status(500).json({
 			msg: 'Could not save user in database'
 		});
@@ -61,7 +62,7 @@ console.log("signup -> signup", signup)
 };
 
 const login = async (req, res, next) => {
-    console.log("login -> login", login)
+    console.log("login -> login", hi login)
 	const { email, password } = req.body;
 
 
@@ -69,6 +70,7 @@ const login = async (req, res, next) => {
 	try {
 		user = await User.findOne({email });
 	} catch (error) {
+		console.log(error);
 		res.status(500).json({
 			msg: 'Logging in failed, please try again later'
 		});
