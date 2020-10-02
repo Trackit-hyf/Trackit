@@ -21,5 +21,5 @@ app.use(checkAuth);
 app.use('/api/assets', assetsRoutes);
 
 app.listen(PORT, () => {
-	console.log('app is listening to' + PORT);
+  console.log('app is listening to' + PORT);
 });
