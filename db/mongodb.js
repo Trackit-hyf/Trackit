@@ -2,9 +2,7 @@ const mongoose = require('mongoose');
 
 
 mongoose.set('useCreateIndex', true);
-console.log(process.env.MongoDb_user_name,process.env
-	.MongoDB_password, process.env
-		.MongoDb_collection );
+
 mongoose
 	.connect(
 		`mongodb+srv://HYF-Ammar:${process.env

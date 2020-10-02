@@ -25,6 +25,9 @@ const signup = async (req, res, next) => {
 	try {
 		await firebase.auth().createUserWithEmailAndPassword(email, password);
 	} catch (error) {
+		res.status(500).json({
+			error 
+		});
 		console.log(error);
 		return next(error);
 	}
@@ -88,13 +91,14 @@ const login = async (req, res, next) => {
 		res.status(500).json({
 			msg: 'could not verify the user'
 		});
-		return next(error);
+		return next(err);
 	}
 
 	if (!isValidPassword) {
 		res.status(500).json({
 			msg: 'password is not valid'
 		});
+		const error = new Error; 
 		return next(error);
 	}
 
