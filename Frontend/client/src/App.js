@@ -13,7 +13,7 @@ import './App.css';
 
 function App() {
   const { user } = useContext(GlobalContext);
-
+  console.log('hi', process.env.REACT_APP_BACKEND);
   return (
     <Router>
       <Fragment>

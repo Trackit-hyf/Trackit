@@ -41,7 +41,7 @@ function AddAsset() {
       };
 
       await Axios.post(
-        `/api/assets/register-assets/${user.userId}`,
+        `${process.env.REACT_APP_BACKEND}/api/assets/register-assets/${user.userId}`,
         asset,
         config
       );

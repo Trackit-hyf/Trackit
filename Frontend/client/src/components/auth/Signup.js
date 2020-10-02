@@ -25,7 +25,7 @@ function Signup() {
     e.preventDefault();
     try {
       const payload = { ...user };
-      const response = await Axios.post('/api/users/signup', payload);
+      const response = await Axios.post(`${process.env.REACT_APP_BACKEND}/api/users/signup`, payload);
       if (response.data.token) history.push('/login');
       // add loading state
     } catch (error) {
