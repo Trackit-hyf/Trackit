@@ -28,7 +28,7 @@ function AssetList() {
         headers: { Authorization: `Bearer ${user.token}` }
       };
       const response = await Axios.get(
-        `/api/assets/myAssets/${user.userId}`,
+        `${process.env.REACT_APP_BACKEND}/api/assets/myAssets/${user.userId}`,
         config
       );
       setAssets(response.data.userAssets);
@@ -51,7 +51,7 @@ function AssetList() {
           headers: { Authorization: `Bearer ${user.token}` }
         };
         await Axios.delete(
-          `/api/assets/delete-assets/${user.userId}/${assetId}`,
+          `${process.env.REACT_APP_BACKEND}/api/assets/delete-assets/${user.userId}/${assetId}`,
           config
         );
         getAssets();
