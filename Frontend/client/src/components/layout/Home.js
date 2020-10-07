@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
+import { GlobalContext } from '../../context/GlobalState';
+
 
 import './Home.css';
 import stockImg from '../../img/stock-market.jpg';
 
 const Landing = () => {
+	const { user } = useContext(GlobalContext);
 	return (
 		<section className="home">
 			<div className="overlay">
@@ -27,7 +30,7 @@ const Landing = () => {
 						</div>
 					</div>
 					<Link to="/signup">
-						<button className="landing_button">Keep me up-to-date</button>
+						{!user.token && <button className="landing_button">Keep me up-to-date</button>}
 					</Link>
 				</div>
 			</div>
