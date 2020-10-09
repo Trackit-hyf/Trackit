@@ -9,13 +9,19 @@
     display: flex;
     justify-content: center;
 }
+.landing_buttons_wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
 .landing_button{
     cursor: pointer;
     display: block;
     box-sizing: border-box;
-    margin: 20px auto; 
+    margin: 20px 10px auto; 
     padding: 8px;
-    width: 80%;
+    width: 10vw;
     max-width: 200px;
     background: transparent; 
     border-color: white;

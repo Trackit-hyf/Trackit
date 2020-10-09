@@ -5,6 +5,7 @@ import { Header, Table, Button, Dimmer, Loader, Message } from 'semantic-ui-reac
 import formatDate from '../../utils/formatDate';
 import { GlobalContext } from '../../context/GlobalState';
 import { useEffect } from 'react';
+import ConfirmModal from '../layout/ConfirmModal';
 
 function AssetList() {
 	const { user } = useContext(GlobalContext);
@@ -12,6 +13,8 @@ function AssetList() {
 	const [ assetId, setAssetId ] = useState('');
 	const [ loading, setLoading ] = useState(false);
 	const [ error, setError ] = useState(false);
+	const [ confirmDeleteModal, setConfirmDeleteModal ] = useState(false);
+	const [ confirmDelete, setConfirmDelete ] = useState(false);
 
 	async function getAssets() {
 		try {
@@ -32,12 +35,11 @@ function AssetList() {
 
 	useEffect(() => {
 		getAssets();
-	}, []);
+	}, [getAssets]);
 
 	useEffect(
 		() => {
-			if (assetId) deleteAsset();
-
+			if (assetId && confirmDelete) deleteAsset();
 			async function deleteAsset() {
 				try {
 					const config = {
@@ -53,7 +55,7 @@ function AssetList() {
 				}
 			}
 		},
-		[ assetId ]
+		[ assetId, confirmDelete ]
 	);
 	const styleGainAndLose = (priceA, priceB) => {
 		if (priceA > priceB) {
@@ -76,6 +78,12 @@ function AssetList() {
 	};
 	return (
 		<div>
+			<ConfirmModal
+				show={confirmDeleteModal}
+				message="You will not be able to track your asset if you delete it!"
+				confirm={setConfirmDelete}
+				onClose={setConfirmDeleteModal}
+			/>
 			{loading ? (
 				<Dimmer active inverted>
 					<Loader inverted>Loading</Loader>
@@ -104,15 +112,12 @@ function AssetList() {
 									<Table.Cell width="2">
 										<Header as="h4">{asset.name}</Header>
 									</Table.Cell>
-
 									<Table.Cell width="2" textAlign="center">
 										{asset.price}
 									</Table.Cell>
-
 									<Table.Cell width="2" textAlign="center">
 										{asset.amount}
 									</Table.Cell>
-
 									<Table.Cell width="2" textAlign="center">
 										{formatDate(asset.dateOfPurchase)}
 									</Table.Cell>
@@ -153,13 +158,13 @@ function AssetList() {
 											inverted
 											color="red"
 											onClick={() => {
+												setConfirmDeleteModal(true);
 												setAssetId(asset._id);
 											}}
 										/>
 									</Table.Cell>
 								</Table.Row>
 							))}
-				
 						</Table.Body>
 					</Table>
 				</div>
