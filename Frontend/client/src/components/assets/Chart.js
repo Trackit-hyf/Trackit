@@ -1,15 +1,14 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-import { Button, Icon, Divider, Header, Image } from 'semantic-ui-react';
+import { Button, Icon, Divider, Header } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
 import formatDate from '../../utils/formatDate';
-import moment from 'moment';
+
 
 function Chart() {
   let location = useLocation();
 
   const {
-    amount,
     dateOfPurchase,
     name,
     price,

@@ -10,12 +10,14 @@ import {
 } from 'semantic-ui-react';
 import { Link, useHistory } from 'react-router-dom';
 import { GlobalContext } from '../../context/GlobalState';
-import { COIN_LIST, INITIAL_ASSET } from '../../config';
+import {INITIAL_ASSET } from '../../config';
 
 function AddAsset() {
   const { user } = useContext(GlobalContext);
   const [asset, setAsset] = useState(INITIAL_ASSET);
   const [error, setError] = useState(false);
+  const [coinList, setCoinList] = useState();
+
   const history = useHistory();
 
   const onChange = (e) => {
@@ -30,7 +32,6 @@ function AddAsset() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     registerAssets();
   }
 
@@ -54,7 +55,7 @@ function AddAsset() {
 
   // Set asset id from dropdown menu
   function setAssetId() {
-    COIN_LIST.find((coin) => {
+    coinList && coinList.find((coin) => {
       if (coin.value === asset.name) {
         return setAsset({
           ...asset,
@@ -63,11 +64,21 @@ function AddAsset() {
       }
     });
   }
+  console.log(asset);
+  useEffect(()=>{
+    const fetchData= async()=>{
+     const response = await Axios.get('https://api.coingecko.com/api/v3/coins/'); 
+    setCoinList(response.data.map(asset =>{
+      return {id: asset.id, text: asset.name, value: asset.name, }
+    }))
+    }
+    fetchData(); 
+  },[]); 
+
 
   useEffect(() => {
     setAssetId();
   }, [asset.name, asset.id]);
-
   return (
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
@@ -79,7 +90,8 @@ function AddAsset() {
           <Segment stacked>
             <Form.Dropdown
               selection
-              options={COIN_LIST}
+              search 
+              options={coinList}
               name='name'
               placeholder='name'
               value={asset.name}

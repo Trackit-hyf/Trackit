@@ -101,6 +101,17 @@ ul {
   height: 50vh;
 }
 
+.priceIncrease {
+  color: green; 
+}
+.priceDecrease {
+  color: red; 
+}
+.priceNoChange {
+  color: rgb(122, 122, 122); 
+  font-weight: bolder;
+}
+
 /* Mobile */
 @media (max-width: 700px) {
   /* Navbar */

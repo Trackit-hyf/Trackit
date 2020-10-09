@@ -1,7 +1,6 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../../context/GlobalState';
-
 
 import './Home.css';
 import stockImg from '../../img/stock-market.jpg';
