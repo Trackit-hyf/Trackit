@@ -27,7 +27,7 @@ function Signup() {
     e.preventDefault();
     try {
       const payload = { ...user };
-      const response = await Axios.post('/api/users/login', payload);
+      const response = await Axios.post(`${process.env.REACT_APP_BACKEND}/api/users/login`, payload);
       if (response.data.token) {
         loginUser(response.data);
         history.push('/myassets');

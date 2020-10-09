@@ -26,7 +26,7 @@ const signup = async (req, res, next) => {
 		await firebase.auth().createUserWithEmailAndPassword(email, password);
 	} catch (error) {
 		res.status(500).json({
-			error 
+			err: error 
 		});
 		console.log(error);
 		return next(error);
