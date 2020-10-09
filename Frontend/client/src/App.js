@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Home from './components/layout/Home';
@@ -13,7 +13,14 @@ import './App.css';
 
 function App() {
   const { user } = useContext(GlobalContext);
-  console.log('hi', process.env.REACT_APP_BACKEND);
+  const { loginUser } = useContext(GlobalContext);
+  
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem('userData')); 
+   if(storedData && storedData.token){
+    loginUser(storedData)
+   }
+  }, [])
   return (
     <Router>
       <Fragment>

@@ -15,7 +15,7 @@ const updateCryptoCoins = async () => {
 	users.forEach(async (user) => {
 		user.assets.forEach(async (asset) => {
 			//if the asset is crypto coin => update it..
-			const Url = `https://api.coingecko.com/api/v3/coins/${asset.name.toLowerCase()}`;
+			const Url = `https://api.coingecko.com/api/v3/coins/${asset.id}`;
 			let priceEuro;
 			try {
 				const response = await axios.get(Url);

@@ -30,6 +30,7 @@ function Signup() {
       const response = await Axios.post(`${process.env.REACT_APP_BACKEND}/api/users/login`, payload);
       if (response.data.token) {
         loginUser(response.data);
+        localStorage.setItem('userData', JSON.stringify({...response.data}))
         history.push('/myassets');
       }
     } catch (error) {
