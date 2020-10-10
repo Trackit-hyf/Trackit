@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Header, Table, Button, Dimmer, Loader, Message } from 'semantic-ui-react';
+import { Header, Table, Button, Dimmer, Loader, Message, Modal, Icon } from 'semantic-ui-react';
 import formatDate from '../../utils/formatDate';
 import { GlobalContext } from '../../context/GlobalState';
 import { useEffect } from 'react';
@@ -32,10 +32,11 @@ function AssetList() {
 			setError(true);
 		}
 	}
+	console.log(assets);
 
 	useEffect(() => {
 		getAssets();
-	}, [getAssets]);
+	}, []);
 
 	useEffect(
 		() => {
@@ -118,6 +119,7 @@ function AssetList() {
 									<Table.Cell width="2" textAlign="center">
 										{asset.amount}
 									</Table.Cell>
+
 									<Table.Cell width="2" textAlign="center">
 										{formatDate(asset.dateOfPurchase)}
 									</Table.Cell>
@@ -128,15 +130,11 @@ function AssetList() {
 												asset.hourly_price[asset.hourly_price.length - 2].price
 											)
 										) : (
-											<p className="priceNoChange">Price to be updated</p>
+											<p className="priceNoChange">{asset.hourly_price[0] && asset.hourly_price[0].price}</p>
 										)}
 									</Table.Cell>
 									<Table.Cell width="2" textAlign="center">
-										{asset.hourly_price.length > 2 ? (
-											calculateProfit(asset.price, asset)
-										) : (
-											<p className="priceNoChange">Profit to be updated</p>
-										)}
+										{asset.hourly_price && calculateProfit(asset.price, asset)}
 									</Table.Cell>
 									<Table.Cell width="2" textAlign="center" style={{ textDecoration: 'underline' }}>
 										{asset.hourly_price.length > 2 && (

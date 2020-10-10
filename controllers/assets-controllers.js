@@ -5,7 +5,7 @@ const User = require('../models/user');
 const registerAssets = async (req, res, next) => {
 	const { id, name, price, amount, dateOfPurchase } = req.body;
 	const uid = req.params.uid;
-
+	console.log('rea', req.body);
 	let user;
 	try {
 		user = await User.findById(uid);
@@ -42,12 +42,26 @@ const registerAssets = async (req, res, next) => {
 				msg: 'Not authorized '
 			});
 		}
+		const Url = `https://api.coingecko.com/api/v3/coins/${id}`;
+			let priceEuro;
+			try {
+				const response = await axios.get(Url);
+				priceEuro = await response.data.market_data.current_price.eur;
+			} catch (error) {
+				console.log('could not add hourly price' , error);
+			}
+			const hourlyPrice = {
+				price: priceEuro,
+				date: new Date()
+			};
+			
 		const newAsset = {
 			id,
 			name,
 			price,
 			amount,
-			dateOfPurchase
+			dateOfPurchase, 
+			hourly_price: hourlyPrice
 		};
 		try {
 			const session = await mongoose.startSession();
@@ -63,7 +77,8 @@ const registerAssets = async (req, res, next) => {
 			return next(err);
 		}
 		res.status(201).json({
-			msg: "Asset is registered and will the price will be updated every hour."
+			msg: "Asset is registered and will the price will be updated every hour.", 
+			newAsset
 		});
 	} else {
 		res.status(500).json({

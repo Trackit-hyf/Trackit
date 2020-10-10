@@ -22,7 +22,7 @@ function App() {
 	   if(storedData && storedData.token){
 		loginUser(storedData); 
 	  }
-	  }, [loginUser])
+	  }, [])
   return (
     <Router>
       <Fragment>

@@ -44,8 +44,8 @@ function AddAsset() {
 		} catch (error) {
 			setError(true);
 		}
-	}
-
+  }
+  
 	// Set asset id from dropdown menu
 	function setAssetId() {
 		coinList &&
