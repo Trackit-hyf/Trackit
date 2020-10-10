@@ -8,7 +8,6 @@ body {
   color: rgb(240, 42, 8);
   font-family: sans-serif;
   font-size: 1.2rem;
-  line-height: 1.5;
 }
 
 a {
@@ -83,10 +82,13 @@ ul {
   height: 100%;
   width: 80%;
   margin: auto;
-  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.label {
+  text-align: center;
 }
 
 .container {
@@ -102,14 +104,14 @@ ul {
 }
 
 .priceIncrease {
-  color: green; 
+  color: green;
 }
 .priceDecrease {
-  color: red; 
+  color: red;
 }
 
 .priceNoChange {
-  color: rgb(122, 122, 122); 
+  color: rgb(122, 122, 122);
   font-weight: bolder;
 }
 
@@ -123,5 +125,37 @@ ul {
 
   .navbar ul {
     justify-content: center;
+  }
+
+  .tables {
+    max-width: 50%;
+    overflow-x: visible;
+    margin-right: 20px;
+  }
+
+  h2 {
+    font-size: 0.5em;
+  }
+}
+
+@media (max-width: 450px) {
+  /* Navbar */
+
+  .navbar ul {
+    display: table;
+  }
+
+  .navbar ul li {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .navbar ul li a {
+    display: block;
+  }
+
+  .logout {
+    vertical-align: baseline;
   }
 }

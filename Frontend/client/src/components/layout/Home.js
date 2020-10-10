@@ -18,15 +18,15 @@ const Landing = () => {
 						</h1>
 						<div className="landing_text">
 							<img className="icon" src={stockImg} alt="stockImage" />
-							<h2>Track all of your assets and your cryptocurrencies in one place </h2>
+							<h2 className='landing-headers'>Track all of your assets and your cryptocurrencies in one place </h2>
 						</div>
 						<div className="landing_text">
 							<img className="icon" src={stockImg} alt="stockImage" />
-							<h2>Stay up-to-date with the market</h2>
+							<h2 className='landing-headers'>Stay up-to-date with the market</h2>
 						</div>
 						<div className="landing_text">
 							<img className="icon" src={stockImg} alt="stockImage" />
-							<h2>All your assets in one place</h2>
+							<h2 className='landing-headers'>All your assets in one place</h2>
 						</div>
 					</div>
 					<div className='landing_buttons_wrapper'> 

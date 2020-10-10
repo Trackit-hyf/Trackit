@@ -19,7 +19,7 @@ const Navbar = ({ user }) => {
 						<li>
 							<Link to="/myassets">My Assets</Link>
 						</li>
-						<li>
+						<li className='logout'>
 							<Link to="/" onClick={() => logoutUser()}>
 								Logout
 							</Link>
