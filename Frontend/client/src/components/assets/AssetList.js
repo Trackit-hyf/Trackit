@@ -32,7 +32,6 @@ function AssetList() {
 			setError(true);
 		}
 	}
-
 	useEffect(() => {
 		getAssets();
 	}, []);
