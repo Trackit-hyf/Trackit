@@ -1,35 +1,46 @@
 .label {
-    font-size: 10vh; 
+  font-size: 10vh;
+  margin-top: 20px !important;
 }
-.icon{
-    width: 2vw;
-    margin-right: 10px;
+.icon {
+  height: 30px;
+  margin-right: 20px;
+  margin: 20px;
 }
-.landing_text{
-    display: flex;
-    justify-content: center;
+.landing_text {
+  display: flex;
+  justify-content: center;
 }
-.landing_buttons_wrapper{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.landing_buttons_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.landing_button {
+  cursor: pointer;
+  display: block;
+  box-sizing: border-box;
+  margin: 20px 10px auto;
+  padding: 8px;
+  width: 10vw;
+  min-width: 100px;
+  background: transparent;
+  border-color: white;
+  border-radius: 8px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-out;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .landing-headers {
+    font-size: 1em;
   }
-
-.landing_button{
-    cursor: pointer;
-    display: block;
-    box-sizing: border-box;
-    margin: 20px 10px auto; 
-    padding: 8px;
-    width: 10vw;
-    max-width: 200px;
-    background: transparent; 
-    border-color: white;
-    border-radius: 8px;
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    letter-spacing: 1px;
-    transition: all 0.3s ease-out;
+  .label {
+    margin-top: 80px !important;
+  }
 }
-

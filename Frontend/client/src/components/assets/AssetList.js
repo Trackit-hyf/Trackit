@@ -90,7 +90,7 @@ function AssetList() {
 			) : error ? (
 				<Message error header="Oops!" content="Something went wrong with getting assets" />
 			) : assets.length > 0 ? (
-				<div>
+				<div className='tables' style={{marginTop:'10px'}}>
 					<Table celled unstackable textAlign="center">
 						<Table.Header>
 							<Table.Row>
