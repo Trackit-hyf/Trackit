@@ -122,7 +122,8 @@ function AssetList() {
 										{formatDate(asset.dateOfPurchase)}
 									</Table.Cell>
 									<Table.Cell width="2" textAlign="center">
-										{asset.hourly_price.length > 2 ? (
+										{console.log(asset.hourly_price)}
+										{asset.hourly_price.length > 1 ? (
 											styleGainAndLose(
 												asset.hourly_price[asset.hourly_price.length - 1].price,
 												asset.hourly_price[asset.hourly_price.length - 2].price
@@ -135,7 +136,7 @@ function AssetList() {
 										{asset.hourly_price && calculateProfit(asset.price, asset)}
 									</Table.Cell>
 									<Table.Cell width="2" textAlign="center" style={{ textDecoration: 'underline' }}>
-										{asset.hourly_price.length > 2 && (
+										{asset.hourly_price.length > 1 && (
 											<Link
 												to={{
 													pathname: '/myassets/chart',
