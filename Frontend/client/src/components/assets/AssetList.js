@@ -122,7 +122,6 @@ function AssetList() {
 										{formatDate(asset.dateOfPurchase)}
 									</Table.Cell>
 									<Table.Cell width="2" textAlign="center">
-										{console.log(asset.hourly_price)}
 										{asset.hourly_price.length > 1 ? (
 											styleGainAndLose(
 												asset.hourly_price[asset.hourly_price.length - 1].price,
