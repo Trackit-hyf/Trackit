@@ -5,7 +5,6 @@ const User = require('../models/user');
 const registerAssets = async (req, res, next) => {
 	const { id, name, price, amount, dateOfPurchase } = req.body;
 	const uid = req.params.uid;
-	console.log('rea', req.body);
 	let user;
 	try {
 		user = await User.findById(uid);
