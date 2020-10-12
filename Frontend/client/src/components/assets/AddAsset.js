@@ -34,14 +34,15 @@ function AddAsset() {
 				headers: { Authorization: `Bearer ${user.token}` }
 			};
 
-			await Axios.post(
+			const response = await Axios.post(
 				`${process.env.REACT_APP_BACKEND}/api/assets/register-assets/${user.userId}`,
 				asset,
 				config
 			);
-
+			console.log(response);
 			history.push('/myassets');
 		} catch (error) {
+            console.log("registerAssets -> error", error)
 			setError(true);
 		}
   }
@@ -74,7 +75,7 @@ function AddAsset() {
 		};
 		fetchData();
 	}, []);
-
+	console.log(error);
 	useEffect(
 		() => {
 			setAssetId();
@@ -87,7 +88,7 @@ function AddAsset() {
 				<Header as="h2" color="grey" textAlign="center">
 					Add new asset
 				</Header>
-
+				{error && <Message error header="Oops!" content="Something went wrong with adding asset. Maybe asset exists already." />}
 				<Form size="large" onSubmit={handleSubmit}>
 					<Segment stacked>
 						<Form.Dropdown
@@ -149,7 +150,6 @@ function AddAsset() {
 							</Button>
 						</Link>
 
-						{error && <Message error header="Oops!" content="Something went wrong with adding asset" />}
 					</Segment>
 				</Form>
 			</Grid.Column>

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Header, Table, Button, Dimmer, Loader, Message, Modal, Icon } from 'semantic-ui-react';
+import { Header, Table, Button, Dimmer, Loader, Message } from 'semantic-ui-react';
 import formatDate from '../../utils/formatDate';
 import { GlobalContext } from '../../context/GlobalState';
 import { useEffect } from 'react';
