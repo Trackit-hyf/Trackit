@@ -34,15 +34,13 @@ function AddAsset() {
 				headers: { Authorization: `Bearer ${user.token}` }
 			};
 
-			const response = await Axios.post(
+			await Axios.post(
 				`${process.env.REACT_APP_BACKEND}/api/assets/register-assets/${user.userId}`,
 				asset,
 				config
 			);
-			console.log(response);
 			history.push('/myassets');
 		} catch (error) {
-            console.log("registerAssets -> error", error)
 			setError(true);
 		}
   }
@@ -75,7 +73,6 @@ function AddAsset() {
 		};
 		fetchData();
 	}, []);
-	console.log(error);
 	useEffect(
 		() => {
 			setAssetId();

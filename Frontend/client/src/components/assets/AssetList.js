@@ -75,6 +75,22 @@ function AssetList() {
 			<p className="priceIncrease">{difference.toFixed(3)}</p>
 		);
 	};
+	const calculateTotalProfit = (assets)=>{
+		if(assets){
+			const totalProfitArr = assets.map(asset => (asset.hourly_price[asset.hourly_price.length - 1].price - asset.price) * asset.amount)
+			const totalAssetProfit = totalProfitArr.reduce((a,b)=> {return a + b}, 0); 
+			return totalAssetProfit
+		}
+	}
+	const calculateTotal =(assets, key)=>{
+		if(assets){
+			const totalAssetArr = assets.map(asset => asset[key]); 
+			const totalAsset = totalAssetArr.reduce((a,b)=> {return a + b}, 0); 
+			return totalAsset
+		}
+	}
+	
+
 	return (
 		<div>
 			<ConfirmModal
@@ -90,7 +106,7 @@ function AssetList() {
 			) : error ? (
 				<Message error header="Oops!" content="Something went wrong with getting assets" />
 			) : assets.length > 0 ? (
-				<div className='tables' style={{marginTop:'10px'}}>
+				<div className="tables" style={{ marginTop: '10px' }}>
 					<Table celled unstackable textAlign="center">
 						<Table.Header>
 							<Table.Row>
@@ -128,7 +144,9 @@ function AssetList() {
 												asset.hourly_price[asset.hourly_price.length - 2].price
 											)
 										) : (
-											<p className="priceNoChange">{asset.hourly_price[0] && asset.hourly_price[0].price}</p>
+											<p className="priceNoChange">
+												{asset.hourly_price[0] && asset.hourly_price[0].price}
+											</p>
 										)}
 									</Table.Cell>
 									<Table.Cell width="2" textAlign="center">
@@ -161,7 +179,22 @@ function AssetList() {
 									</Table.Cell>
 								</Table.Row>
 							))}
+							
 						</Table.Body>
+						<Table.Footer>
+								<Table.Row>
+									<Table.HeaderCell>
+									<Header as="h4">Total: </Header>
+									</Table.HeaderCell>
+									<Table.HeaderCell>{calculateTotal(assets, 'price')} €</Table.HeaderCell>
+									<Table.HeaderCell>{calculateTotal(assets, 'amount')} Coins</Table.HeaderCell>
+									<Table.HeaderCell> -- </Table.HeaderCell>
+									<Table.HeaderCell> -- </Table.HeaderCell>
+									<Table.HeaderCell>{calculateTotalProfit(assets).toFixed(3)} €</Table.HeaderCell>
+									<Table.HeaderCell/>
+									<Table.HeaderCell/>
+								</Table.Row>
+							</Table.Footer>
 					</Table>
 				</div>
 			) : (
