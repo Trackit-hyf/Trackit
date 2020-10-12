@@ -28,6 +28,7 @@ const updateCryptoCoins = async () => {
 				date: new Date()
 			};
 			asset.hourly_price.push(hourlyPrice);
+			console.log('updated');
 			try {
 				await user.save();
 			} catch (err) {
