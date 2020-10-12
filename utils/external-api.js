@@ -3,7 +3,7 @@ const cron = require('node-cron');
 const axios = require('axios');
 
 const updateCryptoCoins = async () => {
-	cron.schedule('0 * * * *',async () => {
+	cron.schedule('* * * * *',async () => {
 		console.log('start');
 	let users;
 	try {
