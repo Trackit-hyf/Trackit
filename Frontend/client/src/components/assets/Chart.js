@@ -1,19 +1,13 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-import { Button, Icon, Divider, Header } from 'semantic-ui-react';
+import { Button, Icon, Divider, Header, Container } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
 import formatDate from '../../utils/formatDate';
-
 
 function Chart() {
   let location = useLocation();
 
-  const {
-    dateOfPurchase,
-    name,
-    price,
-    hourly_price
-  } = location.state.asset;
+  const { dateOfPurchase, name, price, hourly_price } = location.state.asset;
 
   let updatedPrices = hourly_price.map((hour) => hour.price);
   if (updatedPrices.length < 1) updatedPrices = undefined;
@@ -29,14 +23,22 @@ function Chart() {
       {
         label: `${name} data`,
         data: [price, ...updatedPrices],
-        fill: false,
-        borderColor: '#F15C3C'
+        backgroundColor: ['rgb(54,162,235,0.2)'],
+        pointBackgroundColor: ['rgb(54,162,235,0.2)'],
+        pointBorderColor: 'white'
       }
     ]
   };
 
   const options = {
-    maintainAspectRatio: false //
+    maintainAspectRatio: false,
+    scales: {
+      xAxes: [
+        {
+          display: false
+        }
+      ]
+    }
   };
 
   return (
@@ -53,9 +55,15 @@ function Chart() {
           Back to MyAsset
         </Button>
       </Link>
-      <article className='canvas-container'>
-        <Line data={data} options={options} />
-      </article>
+
+      <Container>
+        <article
+          className='canvas-container'
+          style={{ minHeight: 300, width: 'auto' }}
+        >
+          <Line data={data} options={options} />
+        </article>
+      </Container>
     </>
   );
 }

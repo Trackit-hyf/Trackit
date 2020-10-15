@@ -1,46 +1,45 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Button } from './Button';
+import { Link, useHistory } from 'react-router-dom';
 import { GlobalContext } from '../../context/GlobalState';
-
 import './Home.css';
-import stockImg from '../../img/stock-market.jpg';
 
-const Landing = () => {
-	const { user } = useContext(GlobalContext);
-	
-	return (
-		<section className="home">
-			<div className="overlay">
-				<div className="home-inner">
-					<div>
-						<h1 className="label">
-							TRACK<span style={{ color: 'green' }}>i</span>T
-						</h1>
-						<div className="landing_text">
-							<img className="icon" src={stockImg} alt="stockImage" />
-							<h2 className='landing-headers'>Track all of your assets and your cryptocurrencies in one place </h2>
-						</div>
-						<div className="landing_text">
-							<img className="icon" src={stockImg} alt="stockImage" />
-							<h2 className='landing-headers'>Stay up-to-date with the market</h2>
-						</div>
-						<div className="landing_text">
-							<img className="icon" src={stockImg} alt="stockImage" />
-							<h2 className='landing-headers'>All your assets in one place</h2>
-						</div>
-					</div>
-					<div className='landing_buttons_wrapper'> 
-					<Link to="/signup">
-						{!user.token && <button className="landing_button">Keep me up-to-date</button>}
-					</Link>
-					<Link to="/supportedCoins">
-						{!user.token && <button className="landing_button">Supported Coins</button>}
-					</Link>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
-};
+function Home() {
+  const { user } = useContext(GlobalContext);
 
-export default Landing;
+  return (
+    <div className='home-container'>
+      <video src='/videos/back-video3.mp4' autoPlay loop muted />
+      <h1>
+        TRACK<span style={{ color: 'green' }}>i</span>T
+      </h1>
+
+      <p>Reach more than 50 most valuable coins</p>
+      <p>Stay up-to-date with the market</p>
+      <p>All your assets in one place</p>
+      <div className='home-btns'>
+        <Link to='/signup'>
+          {!user.token && (
+            <Button
+              className='home-btns'
+              buttonStyle='btn--outline'
+              buttonSize='btn--large'
+            >
+              Keep me up-to-date
+            </Button>
+          )}
+        </Link>
+
+        <Link to='/supportedcoins' className='btn-mobile'>
+          {!user.token && (
+            <button className={`btn btn--primary btn--large`}>
+              Supported Coins
+            </button>
+          )}
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+export default Home;

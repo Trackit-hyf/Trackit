@@ -1,46 +1,88 @@
-.label {
-  font-size: 10vh;
-  margin-top: 20px !important;
-}
-.icon {
-  height: 30px;
-  margin-right: 20px;
-  margin: 20px;
-}
-.landing_text {
-  display: flex;
-  justify-content: center;
-}
-.landing_buttons_wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -1;
+  /* filter: opacity(90%); */
 }
 
-.landing_button {
-  cursor: pointer;
-  display: block;
-  box-sizing: border-box;
-  margin: 20px 10px auto;
-  padding: 8px;
-  width: 10vw;
-  min-width: 100px;
-  background: transparent;
-  border-color: white;
-  border-radius: 8px;
+.home-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  object-fit: contain;
+}
+
+.home-container > h1 {
   color: #fff;
-  text-align: center;
-  text-decoration: none;
-  letter-spacing: 1px;
-  transition: all 0.3s ease-out;
+  font-size: 100px;
+  margin-top: -100px;
 }
 
-/* Mobile */
-@media (max-width: 700px) {
-  .landing-headers {
-    font-size: 1em;
+.home-container > p {
+  margin-top: 8px;
+  padding: 10px;
+  color: white;
+  font-size: 24px;
+  font-weight: 200;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.404);
+}
+
+.home-btns {
+  margin-top: 32px;
+}
+
+.home-btns .btn {
+  margin: 6px;
+}
+
+.fa-play-circle {
+  margin-left: 4px;
+}
+
+.priceIncrease {
+  color: green;
+}
+.priceDecrease {
+  color: red;
+}
+
+.priceNoChange {
+  color: rgb(122, 122, 122);
+  font-weight: bolder;
+}
+
+@media screen and (max-width: 960px) {
+  .home-container > h1 {
+    font-size: 70px;
+    margin-top: -150px;
   }
-  .label {
-    margin-top: 80px !important;
+}
+
+@media screen and (max-width: 768px) {
+  .home-container > h1 {
+    font-size: 50px;
+    margin-top: -100px;
+  }
+
+  .home-container > p {
+    font-size: 20px;
+  }
+
+  .btn-mobile {
+    display: block;
+    text-decoration: none;
+  }
+
+  .btn {
+    width: 100%;
   }
 }
