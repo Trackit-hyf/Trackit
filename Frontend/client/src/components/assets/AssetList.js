@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
-import Axios from 'axios';
-import { Link } from 'react-router-dom';
 import { Header, Table, Button, Dimmer, Loader, Message } from 'semantic-ui-react';
-import formatDate from '../../utils/formatDate';
+import { Link } from 'react-router-dom';
+import Axios from 'axios';
 import { GlobalContext } from '../../context/GlobalState';
 import { useEffect } from 'react';
 import ConfirmModal from '../layout/ConfirmModal';
+import formatDate from '../../utils/formatDate';
+import {calculate} from '../../utils/calculate';
+
 
 function AssetList() {
 	const { user } = useContext(GlobalContext);
@@ -15,6 +17,8 @@ function AssetList() {
 	const [ error, setError ] = useState(false);
 	const [ confirmDeleteModal, setConfirmDeleteModal ] = useState(false);
 	const [ confirmDelete, setConfirmDelete ] = useState(false);
+
+	const [calculateTotalProfit, calculateTotal ] = calculate(); 
 
 	async function getAssets() {
 		try {
@@ -54,7 +58,7 @@ function AssetList() {
 				}
 			}
 		},
-		[ assetId, confirmDelete ]
+		[ assetId, confirmDelete , user.token, user.userId, getAssets]
 	);
 	const styleGainAndLose = (priceA, priceB) => {
 		if (priceA > priceB) {
@@ -75,22 +79,6 @@ function AssetList() {
 			<p className="priceIncrease">{difference.toFixed(3)}</p>
 		);
 	};
-	const calculateTotalProfit = (assets)=>{
-		if(assets){
-			const totalProfitArr = assets.map(asset => (asset.hourly_price[asset.hourly_price.length - 1].price - asset.price) * asset.amount)
-			const totalAssetProfit = totalProfitArr.reduce((a,b)=> {return a + b}, 0); 
-			return totalAssetProfit
-		}
-	}
-	const calculateTotal =(assets, key)=>{
-		if(assets){
-			const totalAssetArr = assets.map(asset => asset[key]); 
-			const totalAsset = totalAssetArr.reduce((a,b)=> {return a + b}, 0); 
-			return totalAsset
-		}
-	}
-	
-
 	return (
 		<div>
 			<ConfirmModal
@@ -192,7 +180,7 @@ function AssetList() {
 									<Table.HeaderCell> -- </Table.HeaderCell>
 									<Table.HeaderCell>{calculateTotalProfit(assets).toFixed(3)} €</Table.HeaderCell>
 									<Table.HeaderCell/>
-									<Table.HeaderCell/>
+									<Table.HeaderCell width="1" />
 								</Table.Row>
 							</Table.Footer>
 					</Table>
