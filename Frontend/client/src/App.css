@@ -25,3 +25,7 @@
 .table-assets {
   font-size: 10px !important;
 }
+.header_cell{
+  cursor: pointer !important; 
+  text-decoration: underline;
+}
