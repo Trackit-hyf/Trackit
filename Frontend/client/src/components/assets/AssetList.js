@@ -313,7 +313,7 @@ function AssetList() {
                       <Header as='h4'>Total: </Header>
                     </Table.HeaderCell>
                     <Table.HeaderCell>
-                      {calculateTotal(assets, 'price')} €
+                      {calculateTotal(assets, 'price').toFixed(3)} €
                     </Table.HeaderCell>
                     <Table.HeaderCell>
                       {calculateTotal(assets, 'amount')} Coins
