@@ -15,24 +15,24 @@ const registerAssets = async (req, res, next) => {
 		return next(error);
 	}
 
-	const assetExists = user.assets.find(asset => asset.name === name)
-	if(assetExists) {
+	const assetExists = user.assets.find((asset) => asset.name === name);
+	if (assetExists) {
 		res.status(500).json({
 			msg: 'Asset exists already. Please enter another asset or modify the one you have already!'
 		});
 		return next();
 	}
-	
-	let supportedCoins;
-	try {
-		const response = await axios.get('https://api.coingecko.com/api/v3/coins/list');
-		supportedCoins = response.data;
-	} catch (err) {
-		res.status(500).json({
-			msg: 'Could not load supported coins.'
-		});
-		return next(error);
-	}
+
+	// let supportedCoins;
+	// try {
+	// 	const response = await axios.get('https://api.coingecko.com/api/v3/coins/list');
+	// 	supportedCoins = response.data;
+	// } catch (err) {
+	// 	res.status(500).json({
+	// 		msg: 'Could not load supported coins.'
+	// 	});
+	// 	return next(error);
+	// }
 	const coinExists = supportedCoins.find((supportedCoin) => supportedCoin.id === id.toLowerCase());
 
 	if (coinExists) {
@@ -42,24 +42,24 @@ const registerAssets = async (req, res, next) => {
 			});
 		}
 		const Url = `https://api.coingecko.com/api/v3/coins/${id}`;
-			let priceEuro;
-			try {
-				const response = await axios.get(Url);
-				priceEuro = await response.data.market_data.current_price.eur;
-			} catch (error) {
-				console.log('could not add hourly price' , error);
-			}
-			const hourlyPrice = {
-				price: priceEuro,
-				date: new Date()
-			};
-			
+		let priceEuro;
+		try {
+			const response = await axios.get(Url);
+			priceEuro = await response.data.market_data.current_price.eur;
+		} catch (error) {
+			console.log('could not add hourly price', error);
+		}
+		const hourlyPrice = {
+			price: priceEuro,
+			date: new Date()
+		};
+
 		const newAsset = {
 			id,
 			name,
 			price,
 			amount,
-			dateOfPurchase, 
+			dateOfPurchase,
 			hourly_price: hourlyPrice
 		};
 		try {
@@ -76,7 +76,7 @@ const registerAssets = async (req, res, next) => {
 			return next(err);
 		}
 		res.status(201).json({
-			msg: "Asset is registered and will the price will be updated every hour.", 
+			msg: 'Asset is registered and will the price will be updated every hour.',
 			newAsset
 		});
 	} else {
@@ -87,7 +87,7 @@ const registerAssets = async (req, res, next) => {
 };
 
 const modifyAsset = async (req, res, next) => {
-	const {price, amount, dateOfPurchase } = req.body;
+	const { price, amount, dateOfPurchase } = req.body;
 	const uid = req.params.uid;
 	const aId = req.params.assetId;
 
