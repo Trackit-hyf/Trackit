@@ -46,7 +46,7 @@ const registerAssets = async (req, res, next) => {
 		const response = await axios.get(Url);
 		priceEuro = await response.data.market_data.current_price.eur;
 	} catch (error) {
-		console.log('could not add hourly price', error);
+		console.log('could not add price', error);
 	}
 	const hourlyPrice = {
 		price: priceEuro,
