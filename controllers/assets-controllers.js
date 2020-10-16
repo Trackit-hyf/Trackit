@@ -33,57 +33,51 @@ const registerAssets = async (req, res, next) => {
 	// 	});
 	// 	return next(error);
 	// }
-	const coinExists = supportedCoins.find((supportedCoin) => supportedCoin.id === id.toLowerCase());
+	// const coinExists = supportedCoins.find((supportedCoin) => supportedCoin.id === id.toLowerCase());
 
-	if (coinExists) {
-		if (user.firebaseId !== req.userData.firebaseId) {
-			res.status(500).json({
-				msg: 'Not authorized '
-			});
-		}
-		const Url = `https://api.coingecko.com/api/v3/coins/${id}`;
-		let priceEuro;
-		try {
-			const response = await axios.get(Url);
-			priceEuro = await response.data.market_data.current_price.eur;
-		} catch (error) {
-			console.log('could not add hourly price', error);
-		}
-		const hourlyPrice = {
-			price: priceEuro,
-			date: new Date()
-		};
-
-		const newAsset = {
-			id,
-			name,
-			price,
-			amount,
-			dateOfPurchase,
-			hourly_price: hourlyPrice
-		};
-		try {
-			const session = await mongoose.startSession();
-			session.startTransaction();
-			await user.save({ session });
-			user.assets.push(newAsset);
-			await user.save({ session });
-			await session.commitTransaction();
-		} catch (err) {
-			res.status(500).json({
-				msg: 'Something went wrong, could not register assets in database.'
-			});
-			return next(err);
-		}
-		res.status(201).json({
-			msg: 'Asset is registered and will the price will be updated every hour.',
-			newAsset
-		});
-	} else {
+	if (user.firebaseId !== req.userData.firebaseId) {
 		res.status(500).json({
-			msg: 'Asset is not supported'
+			msg: 'Not authorized '
 		});
 	}
+	const Url = `https://api.coingecko.com/api/v3/coins/${id}`;
+	let priceEuro;
+	try {
+		const response = await axios.get(Url);
+		priceEuro = await response.data.market_data.current_price.eur;
+	} catch (error) {
+		console.log('could not add hourly price', error);
+	}
+	const hourlyPrice = {
+		price: priceEuro,
+		date: new Date()
+	};
+
+	const newAsset = {
+		id,
+		name,
+		price,
+		amount,
+		dateOfPurchase,
+		hourly_price: hourlyPrice
+	};
+	try {
+		const session = await mongoose.startSession();
+		session.startTransaction();
+		await user.save({ session });
+		user.assets.push(newAsset);
+		await user.save({ session });
+		await session.commitTransaction();
+	} catch (err) {
+		res.status(500).json({
+			msg: 'Something went wrong, could not register assets in database.'
+		});
+		return next(err);
+	}
+	res.status(201).json({
+		msg: 'Asset is registered and will the price will be updated every hour.',
+		newAsset
+	});
 };
 
 const modifyAsset = async (req, res, next) => {
