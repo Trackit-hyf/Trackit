@@ -43,16 +43,14 @@ export default function AssetsCells({ asset, onDelete }) {
 					color: 'orangered'
 				}}
 			>
-				{asset.hourly_price.length > 1 && (
-					<Link
-						to={{
-							pathname: '/myassets/chart',
-							state: { asset }
-						}}
-					>
-						Price late changes
-					</Link>
-				)}
+				<Link
+					to={{
+						pathname: '/myassets/chart',
+						state: { asset }
+					}}
+				>
+					Price late changes
+				</Link>
 			</Table.Cell>
 			<Table.Cell width="1" textAlign="center">
 				<Button circular icon="delete" size="mini" inverted color="red" onClick={() => onDelete(asset._id)} />

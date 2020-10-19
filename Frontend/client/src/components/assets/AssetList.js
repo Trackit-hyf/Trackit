@@ -252,6 +252,8 @@ function AssetList() {
 										<Table.HeaderCell> -- </Table.HeaderCell>
 										<Table.HeaderCell> -- </Table.HeaderCell>
 										<Table.HeaderCell>{calculateTotalProfit(assets).toFixed(3)} €</Table.HeaderCell>
+										<Table.HeaderCell> </Table.HeaderCell>
+										<Table.HeaderCell> </Table.HeaderCell>
 									</Table.Row>
 								</Table.Footer>
 							</Table>

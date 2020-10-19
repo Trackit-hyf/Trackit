@@ -63,6 +63,7 @@ function Chart() {
         >
           <Line data={data} options={options} />
         </article>
+      <p> Price is updated every five minutes</p>
       </Container>
     </>
   );
