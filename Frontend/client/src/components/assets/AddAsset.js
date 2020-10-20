@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
-import { Button, Form, Grid, Header, Segment, Message, TextArea } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react';
 import { Link, useHistory } from 'react-router-dom';
 import { GlobalContext } from '../../context/GlobalState';
 import { INITIAL_ASSET } from '../../config';

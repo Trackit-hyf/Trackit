@@ -27,9 +27,6 @@ const Navbar = ({ user }) => {
   }, []);
 
   window.addEventListener('resize', showButton);
-
-  const history = useHistory();
-
   return (
     <>
       {user.token ? (
